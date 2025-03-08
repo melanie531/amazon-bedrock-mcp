@@ -34,10 +34,9 @@ class MCPClient:
         if not self.session:
             raise RuntimeError("Not connected to MCP server")
             
-        tools = await self.session.list_tools()
-        # The response structure from list_tools() is different than expected
-        # Just return the tools directly as they come from the session
-        return tools
+        results = await self.session.list_tools()
+        # Access the tools attribute from the ListToolsResult object
+        return results.tools
 
     async def call_tool(self, tool_name: str, arguments: dict) -> Any:
         """Call a tool with given arguments"""
